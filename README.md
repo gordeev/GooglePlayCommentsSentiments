@@ -14,7 +14,7 @@ The script fetches the first 100 reviews of a specified mobile game from the Goo
 + Run the script with python game_review_analysis.py.
 + Warnings
 
-# You should be aware of this possibility and consider implementing appropriate error handling and rate limiting measures. The provided code is a simple demonstration and might not be suitable for production use without further refinement.
+You should be aware of this possibility and consider implementing appropriate error handling and rate limiting measures. The provided code is a simple demonstration and might not be suitable for production use without further refinement.
 
 # License
 This project is available under the MIT license.
