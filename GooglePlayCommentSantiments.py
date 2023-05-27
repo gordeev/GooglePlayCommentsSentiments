@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 # URL of the app
-app_url = "GOOGLE_PLAY_STORE_URL"
+app_url = "GOOGLE_PLAY_GAME_URL"
 
 # Initialize Selenium driver
 driver = webdriver.Chrome(executable_path='./chromedriver')
@@ -33,28 +33,22 @@ review_text = " ".join(review_texts)
 if len(review_text) > 3800:
     review_text = review_text[:3800]
 
-# Create the API prompt
-prompt = f"Here are 100 reviews of the game at {app_url}: {review_text}.\n\nPlease provide a summary of the game's strong points and weak points based on these reviews in JSON format like this: {{'strong_points': ['point1', 'point2', 'point3'], 'weak_points': ['point1', 'point2', 'point3']}}. Please provide the response strictly in JSON format."
+openai.api_key = "OPENAI_API_KEY"
 
-openai.api_key = "your-api-key"
+response = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+        {"role": "system", "content": "You are a helpful mobile game producer assistant."},
+        {"role": "user", "content": review_text},
+        {"role": "user", "content": "Summarize the comments of the game and identify 5 strengths and 5 weaknesses of the video based on the comments."}
+    ]
+)
 
-# Loop until we get a valid JSON response
-while True:
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=300
-    )
-
-    # Parse the model's response into JSON
-    try:
-        report = json.loads(response.choices[0].text.strip())
-        break
-    except json.JSONDecodeError:
-        print("Failed to parse the model's response as JSON. Retrying...")
-        continue
+print(response['choices'][0]['message']['content'])
+report = response['choices'][0]['message']['content']
 
 # Write the result to a file
 package_name = app_url.split("=")[1].split("&")[0]
-with open(f"{package_name}.json", 'w') as f:
+with open(f"{package_name}.txt", 'w') as f:
     json.dump(report, f, indent=4)
+
