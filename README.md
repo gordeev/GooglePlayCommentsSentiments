@@ -14,8 +14,6 @@ The script fetches the first 100 reviews of a specified mobile game from the Goo
 + Run the script with python game_review_analysis.py.
 + Warnings
 
-# This script continues to send requests to the OpenAI API until it receives a response in a format that can be parsed as JSON. This is because the script requires the output in a structured format. However, this might cause the script to enter a loop if the model consistently returns responses that cannot be parsed as JSON, which might result in a higher than expected API usage and costs.
-
 # You should be aware of this possibility and consider implementing appropriate error handling and rate limiting measures. The provided code is a simple demonstration and might not be suitable for production use without further refinement.
 
 # License
