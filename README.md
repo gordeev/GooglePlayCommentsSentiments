@@ -2,7 +2,7 @@
 This project uses Selenium to scrape reviews from Google Play Store and then OpenAI's GPT-3 model to analyze and summarize the reviews.
 
 # What It Does
-The script fetches the first 100 reviews of a specified mobile game from the Google Play Store. It then sends these reviews to OpenAI's GPT-3 model and asks the model to summarize the strong and weak points of the game based on these reviews. The result is saved in a JSON file.
+The script fetches the first 100 reviews of a specified mobile game from the Google Play Store. It then sends these reviews to OpenAI's GPT-3 model and asks the model to summarize the strong and weak points of the game based on these reviews. The result is saved in TXT file.
 
 # Setup
 
